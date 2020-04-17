@@ -277,6 +277,12 @@ const students = [
 //     document.body.appendChild(createHeading);
 // }
 
+// const h1 = (text, headingClassName) =>
+// {
+//     return`
+//     <h1 class="xx-large ${headingClassName}"> ${text} </h1>`
+// }
+
 // const section = (text) =>
 // {
 //     let createSection = document.createElement("section");
@@ -286,6 +292,11 @@ const students = [
 //     document.body.appendChild(createSection);
 // }
 
+// const section = (text) =>
+// {
+//     return `<section class="bordered dashed section--padded">${studentObject.subject}</section>`
+// }
+
 // const aside = (text) =>
 // {
 //     let createAside = document.createElement("aside");
@@ -293,6 +304,11 @@ const students = [
 //     createAside.setAttribute("class", "pushRight")
 //     createAside.appendChild(asideText);
 //     document.body.appendChild(createAside);
+// }
+
+// const aside = (text) =>
+// {
+//     return`<aside class="pushRight">${studentObject.info}</aside>`
 // }
 
 // const createStudentComponent = (student, headingClassName) => {
@@ -318,22 +334,29 @@ const students = [
 
 
 // Challenge 2: Generic HTML Function
+// const element = (elementType, text, className) =>
+// {
+//     let createElement = document.createElement(elementType);
+//     let ElementText = document.createTextNode(text);
+//     createElement.setAttribute("class", `${className}`)
+//     createElement.appendChild(ElementText);
+//     document.body.appendChild(createElement);
+// }
+
 const element = (elementType, text, className) =>
 {
-    let createElement = document.createElement(elementType);
-    let ElementText = document.createTextNode(text);
-    createElement.setAttribute("class", `${className}`)
-    createElement.appendChild(ElementText);
-    document.body.appendChild(createElement);
+    return`
+    <${elementType} class = "${className}"> ${text} </${elementType}>`
 }
 
-const createStudentComponent = (student, headingClassName) =>{ `
+const createStudentComponent = (student, headingClassName) =>
+   `
     <div id="student">
         ${element("h1", student.name, `xx-large ${headingClassName}`)}
         ${element("section", student.subject, "bordered dashed section--padded")}
         ${element("aside", student.info, "pushRight")}
     </div>`
-}
+
 
 for (student of students){
     let studentComponent = ""
@@ -344,6 +367,8 @@ for (student of students){
     else{
         studentComponent = createStudentComponent(student, "failing")
     } 
+
+    document.querySelector("#container").innerHTML += studentComponent
 }
 
 // Advanced Challenge: Using createElement for Components
